@@ -1,16 +1,16 @@
-// fetch(
-//   "https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2024&month=DECEMBER",
-//   {
-//     method: "GET",
-//     headers: {
-//       "X-API-KEY": "afad8687-496e-4161-9dd6-d96bd7c3f793",
-//       "Content-Type": "application/json",
-//     },
-//   }
-// )
-//   .then((res) => res.json())
-//   .then((json) => localStorage.setItem("films", JSON.stringify(json)))
-//   .catch((err) => console.log(err));
+fetch(
+  "https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2024&month=DECEMBER",
+  {
+    method: "GET",
+    headers: {
+      "X-API-KEY": "afad8687-496e-4161-9dd6-d96bd7c3f793",
+      "Content-Type": "application/json",
+    },
+  }
+)
+  .then((res) => res.json())
+  .then((json) => localStorage.setItem("films", JSON.stringify(json)))
+  .catch((err) => console.log(err));
 
 // Загрузить все фильмы на страницу
 const locale = localStorage.getItem("films");
