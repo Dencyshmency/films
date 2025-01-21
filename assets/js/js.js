@@ -33,16 +33,6 @@ function showFilms() {
 
 showFilms();
 
-// Загрузка данных о датах
-
-// function takeDataAboutFilm(item) {
-//   let idElem = item.getAttribute("data-id");
-//   let films = [JSON.parse(localStorage.getItem("data"))];
-//   let current = films.filter((el) => el.id === idElem);
-//   currentFilm = current;
-//   console.log(current);
-// }
-
 let data = new Date();
 let day = data.getDate();
 const currentDate = new Date();
@@ -165,27 +155,36 @@ dates.forEach((el) => {
 
     let getItem = JSON.parse(localStorage.getItem("data"));
 
-    let currentItem = getItem.find((el) => el.id === bookedItem.id);
-    console.log(currentItem.data);
-    current = currentItem.data.find((it) => it.date === el.textContent);
+    if (getItem !== null) {
+      let currentItem = getItem.find((el) => el.id === bookedItem.id);
 
-    let currentItems = current.timePlace;
+      console.log(currentItem.data);
 
-    allPlaceTime.forEach((e) => {
-      let time = e.getAttribute("data-time");
+      current = currentItem.data.find((it) => it.date === el.textContent);
 
-      let itt = currentItems.find((o) => o.time === time);
+      let currentTimeAndPlace = current.timePlace;
 
-      let rty = itt.place;
+      console.log(currentTimeAndPlace);
 
-      e.childNodes.forEach((i) => {
-        rty.forEach((q) => {
-          if (i.textContent === q) {
-            i.classList.add("sold");
+      currentTimeAndPlace.forEach((c) => {
+        let tt = c.time;
+        let rr = c.place;
+
+        allPlaceTime.forEach((e) => {
+          let tu = e.getAttribute("data-time");
+
+          if (tt === tu) {
+            e.childNodes.forEach((i) => {
+              rr.forEach((q) => {
+                if (i.textContent === q) {
+                  i.classList.add("sold");
+                }
+              });
+            });
           }
         });
       });
-    });
+    }
   });
 });
 
@@ -306,21 +305,6 @@ function saveDate() {
 }
 
 let timesAndPlaece;
-
-// function showData(time) {
-//   if (localStorage.getItem("data") !== null) {
-//     let allData = [JSON.parse(localStorage.getItem("data"))];
-
-//     let currentFilm = allData.find((el) => el.id === bookedItem.id);
-//     let currentFilmDates = currentFilm.data;
-
-//     currentFilmDates.forEach((el) => {
-//       if (el.date == time) {
-//         timesAndPlaece = el.timePlace;
-//       }
-//     });
-//   }
-// }
 
 const cancelBtn = document.querySelector(".cancel-btn");
 
