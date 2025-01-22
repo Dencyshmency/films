@@ -139,6 +139,7 @@ let allPlaceTime = document.querySelectorAll(".place");
 
 dates.forEach((el) => {
   el.addEventListener("click", () => {
+    let getItem = "";
     let date = el.textContent;
     currentData.date = date;
     document.querySelector(".places-wrapper").classList.add("open-wrap");
@@ -153,18 +154,18 @@ dates.forEach((el) => {
       });
     }
 
-    let getItem = JSON.parse(localStorage.getItem("data"));
+    getItem = JSON.parse(localStorage.getItem("data"));
 
-    if (getItem !== null) {
-      let currentItem = getItem.find((el) => el.id === bookedItem.id);
-
-      console.log(currentItem.data);
+    let currentItem = getItem.find((el) => el.id === bookedItem.id);
+    if (getItem !== null && currentItem !== undefined) {
+      // console.log(currentItem);
+      // console.log(currentItem.data);
 
       current = currentItem.data.find((it) => it.date === el.textContent);
 
       let currentTimeAndPlace = current.timePlace;
 
-      console.log(currentTimeAndPlace);
+      // console.log(currentTimeAndPlace);
 
       currentTimeAndPlace.forEach((c) => {
         let tt = c.time;
@@ -314,6 +315,8 @@ cancelBtn.addEventListener("click", () => {
   placeLi.forEach((el) => {
     el.classList.remove("checked");
   });
+
+  timeAndPlace.place.length = 0;
   acceptBtn.classList.remove("active-btn");
 });
 
@@ -323,9 +326,15 @@ function activeBtn() {
   } else {
     acceptBtn.classList.remove("active-btn");
   }
+
+  console.log(timeAndPlace.place);
 }
 
 function clearPlaceAndDate() {
+  placeItems.forEach((el) => {
+    el.classList.remove("checked");
+  });
+
   placeItems.forEach((el) => {
     el.classList.remove("sold");
   });
@@ -337,4 +346,6 @@ function clearPlaceAndDate() {
       el.classList.add("checked");
     }
   });
+  timeAndPlace.place.length = 0;
+  acceptBtn.classList.remove("active-btn");
 }
